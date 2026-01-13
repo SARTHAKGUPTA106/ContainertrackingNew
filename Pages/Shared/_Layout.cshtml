@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shipment Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="./css/masterstyle.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+        <a class="navbar-brand me-4" href="#">
+            <img src="./images/logo.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Planning</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Visibility</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Audit</a></li> -->
+            </ul>
+
+            <!-- Search bar -->
+            <form class="d-flex search-box me-3">
+                <input class="form-control me-2" type="search" placeholder="Search for all containers..." aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <!-- User dropdown -->
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <i class="fa fa-user"></i><strong>User</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-gear fa-spin"></i>Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar p-3">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#shipmentModal">
+                    <i class="fa fa-plus"></i> Add Shipment
+                </button>
+
+                <div class="list-group">
+                    <a href="gocomet.html" class="list-group-item list-group-item-action active">All Shipments (6)</a>
+                    <a href="Yettostart.html" class="list-group-item list-group-item-action">Yet to Start (1)</a>
+                    <a href="InTransit.html" class="list-group-item list-group-item-action">In Transit (4)</a>
+                    <a href="#" class="list-group-item list-group-item-action">Completed (2)</a>
+                </div>
+            </div>
+
+            <!-- Shipment Modal -->
+            <div class="modal fade" id="shipmentModal" tabindex="-1" aria-labelledby="shipmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="shipmentModalLabel">Shipment Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="mode" class="form-label">Mode <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="mode" required>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="referenceNo" class="form-label">Reference No.</label>
+                                            <input type="text" class="form-control" id="referenceNo">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="trackingNumber" class="form-label">Tracking Number(MBL / MAWB / Booking No. / Container No.)<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="trackingNumber" required>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="carrier" class="form-label">Carrier <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="carrier" required>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="containerNumbers" class="form-label">Container Numbers</label>
+                                            <input type="text" class="form-control" id="containerNumbers">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="dispatchDate" class="form-label">Factory Dispatch Date</label>
+                                            <input type="date" class="form-control" id="dispatchDate">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="origin" class="form-label">Origin (POL)</label>
+                                            <input type="text" class="form-control" id="origin">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="destination" class="form-label">Destination</label>
+                                            <input type="text" class="form-control" id="destination">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 p-2">
+                <div class="offset-md-7">
+                    <select class="form-select d-inline-block w-auto me-2">
+                        <option>Last 2 Months</option>
+                        <option>Last 6 Months</option>
+                    </select>
+                    <button class="btn btn-outline-secondary me-2"><i class="fas fa-filter"></i> Filters</button>
+                    <button class="btn btn-outline-primary"><i class="fas fa-download"></i> Download Reports</button>
+                </div>
+
+
+                @RenderBody()
+              
+            </div>
+        </div>
+    </div> <!-- End of Main Content -->
+    </div> <!-- End of Row -->
+    </div> <!-- End of Container -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+
+
+
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

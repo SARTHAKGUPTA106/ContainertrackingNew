@@ -1,0 +1,117 @@
+﻿
+body {
+    background-color: #f5f7fb;
+    font-family: 'Inter', sans-serif;
+}
+
+.navbar {
+    background: #ffffffcc !important;
+    backdrop-filter: blur(8px);
+}
+
+.navbar-brand img {
+    height: 42px;
+}
+
+
+.sidebar {
+    background: white;
+    min-height: 100vh;
+    border-right: 1px solid #eaeaea;
+}
+
+    .sidebar .list-group-item {
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 6px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+        .sidebar .list-group-item:hover {
+            background-color: #eef2ff;
+        }
+
+        .sidebar .list-group-item.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+
+.modal-content {
+    border-radius: 16px;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #4f46e5;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #4338ca;
+    }
+
+
+
+/* Modal Header */
+.shipment-modal-header {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: #fff;
+    border-bottom: none;
+}
+
+    .shipment-modal-header .modal-title {
+        font-weight: 600;
+    }
+
+/* Form Sections */
+.form-section {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #4f46e5;
+}
+
+/* Required field */
+.form-label.required::after {
+    content: " *";
+    color: #dc2626;
+}
+
+/* Footer */
+.shipment-modal-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    position: sticky;
+    bottom: 0;
+}
+
+/* Inputs */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 0.15rem rgba(79, 70, 229, 0.25);
+    }

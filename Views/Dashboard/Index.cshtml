@@ -1,0 +1,148 @@
+﻿@model List<ContainerTracking.Models.ShippingDetailsModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+}
+
+<!-- Search Bar -->
+<div class="search-container mt-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="input-group">
+                <input id="searchInput" class="form-control" type="search" placeholder="Search for all containers..." aria-label="Search">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Title -->
+<h4 class="heading-dashboard mt-4">🚚 All Shipment Dashboard Table</h4>
+
+<!-- Loading Spinner -->
+<div id="loadingSpinner" class="text-center d-none">
+    <i class="fas fa-spinner fa-spin fa-3x"></i>
+    <p>Loading data...</p>
+</div>
+
+<!-- Table -->
+<div class="table-responsive mt-4">
+    <table id="shipmentTable" class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th class="sortable">Mode</th>
+                <th class="sortable">Container No.</th>
+                <th class="sortable">BL No.</th>
+                <th class="sortable">Shipping Time</th>
+                <th class="sortable">ETA</th>
+                <th class="sortable">Actual Time</th>
+                <th class="sortable">Arrival Date</th>
+                <th class="sortable">Dispatch Date</th>
+                <th class="sortable">Port of Departure</th>
+                <th class="sortable">Current Position</th>
+                <th class="sortable">Port of Destination</th>
+                <th class="sortable">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated here via JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination (optional for large datasets) -->
+<div id="pagination" class="mt-3 text-center d-none">
+    <button class="btn btn-primary" id="prevPage">Previous</button>
+    <span id="pageNumber">Page 1</span>
+    <button class="btn btn-primary" id="nextPage">Next</button>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initial data load
+        SeletedDataload();
+
+        // Search input event handler
+        $('#searchInput').on('input', function (e) {
+            e.preventDefault();
+            SeletedDataload();
+        });
+
+        // Table sorting (click on table headers to sort)
+        $('th.sortable').on('click', function () {
+            var index = $(this).index();
+            var rows = $('#shipmentTable tbody tr').get();
+            var ascending = !$(this).hasClass('asc');
+            $(this).toggleClass('asc', ascending).toggleClass('desc', !ascending);
+            rows.sort(function (a, b) {
+                var cellA = $(a).children('td').eq(index).text();
+                var cellB = $(b).children('td').eq(index).text();
+                return ascending ? (cellA > cellB ? 1 : -1) : (cellA < cellB ? 1 : -1);
+            });
+            $.each(rows, function (i, row) {
+                $('#shipmentTable tbody').append(row);
+            });
+        });
+    });
+
+    function SeletedDataload() {
+        var searchTerm = $('#searchInput').val();
+        var tbody = $("#shipmentTable tbody");
+        tbody.empty();
+        $('#loadingSpinner').removeClass('d-none');  
+        $('#pagination').addClass('d-none');        
+
+        $.ajax({
+            url: '/Dashboard/SearchAction',
+            type: 'GET',
+            data: { searchTerm: searchTerm },
+            success: function (response) {
+                console.log(response);
+
+              
+                $('#loadingSpinner').addClass('d-none');
+                if (!response || response.length === 0) {
+                    tbody.append('<tr><td colspan="12" class="text-danger text-center">No data found</td></tr>');
+                    return;
+                }
+
+              
+                response.forEach(function (item) {
+                    var row = `
+                        <tr>
+                            <td>${item.mode}</td>
+                            <td>${item.containerNumbers}</td>
+                            <td>${item.trackingNumber}</td>
+                            <td>${formatDate(item.shippingTime)}</td>
+                            <td>${formatDate(item.eta)}</td>
+                            <td>${formatDate(item.actualTime)}</td>
+                            <td>${formatDate(item.arrivalDate)}</td>
+                            <td>${formatDate(item.dispatchDate)}</td>
+                            <td>${item.portOfDeparture}</td>
+                            <td>${item.currentPosition}</td>
+                            <td>${item.portOfDestination}</td>
+                            <td>${item.status}</td>
+                        </tr>`;
+                    tbody.append(row);
+                });
+                // Show pagination if there are a lot of records (optional)
+                // $('#pagination').removeClass('d-none');
+            },
+            error: function (err) {
+                console.error(err);
+                $('#loadingSpinner').addClass('d-none');
+                tbody.append('<tr><td colspan="12" class="text-danger text-center">Error loading data</td></tr>');
+            }
+        });
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        return date.toISOString().split('T')[0];
+    }
+</script>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">

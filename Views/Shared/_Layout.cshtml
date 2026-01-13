@@ -1,0 +1,338 @@
+﻿<fieldset>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Shipment Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">   
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="~/css/DashBoard.csss" />
+    </head>
+    <body>          
+        <nav class="navbar navbar-expand-lg shadow-sm px-4">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+                <img src="/images/SGLOGO.png" class="me-2">
+                Shipment Dashboard
+            </a>
+
+            <div class="ms-auto dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                   data-bs-toggle="dropdown">
+                    <i class="fa fa-user-circle fs-4 me-2"></i>
+                    <strong>User</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-gear me-2"></i>Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out-alt me-2"></i>Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+          
+        <div class="container-fluid">
+            <div class="row">
+                              
+                <div class="col-md-2 sidebar p-3">
+
+                    <button class="btn btn-primary w-100 mb-4 shadow-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#shipmentModal" id="Btn_AddShipment">
+                        <i class="fa fa-plus me-2"></i>Add Shipment
+                    </button>
+
+                    <div id="statusList" class="list-group">
+                        <a class="list-group-item active"><i class="fa fa-box me-2"></i>All Shipments</a>
+                        <a class="list-group-item" id="Btn_YetToStart">
+                            <i class="fa fa-clock me-2"></i>Yet to Start
+                        </a>
+                        <a class="list-group-item" id="btn_InTransit"><i class="fa fa-truck me-2"></i>In Transit</a>
+                        <a class="list-group-item" id="btn_Arrived"><i class="fa fa-warehouse me-2"></i>Arrived</a>
+                        <a class="list-group-item" id="Btn_Delayed"><i class="fa fa-triangle-exclamation me-2"></i>Delayed</a>
+                    </div>
+                </div>
+                             
+                <div class="col-md-10 p-4">
+                                   
+                    <div class="card mb-4">
+                        <div class="card-body d-flex justify-content-end gap-2">
+                            <select class="form-select w-auto">
+                                <option>Last 2 Months</option>
+                                <option>Last 6 Months</option>
+                            </select>
+
+                            <button class="btn btn-outline-secondary">
+                                <i class="fa fa-filter me-1"></i>Filters
+                            </button>
+
+                            <button class="btn btn-outline-primary">
+                                <i class="fa fa-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                                    
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="shipmentModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header shipment-modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa fa-box me-2"></i> Add Shipment
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <form id="shipmentForm">
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+
+                            <!-- Shipment Information -->
+                            <div class="form-section">
+                                <h6 class="section-title">
+                                    <i class="fa fa-info-circle me-2"></i>Shipment Information
+                                </h6>
+
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label required">Mode</label>
+                                        <select class="form-select" id="mode" required>
+                                            <option value="">Select Mode</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label">Reference No.</label>
+                                        <input type="text" class="form-control" id="referenceNo"
+                                               placeholder="REF-001">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label required">Tracking Number</label>
+                                        <input type="text" class="form-control" id="trackingNumber"
+                                               placeholder="TRK123456" required>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label required">Carrier</label>
+                                        <input type="text" class="form-control" id="carrier"
+                                               placeholder="Maersk / DHL" required>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label">Container Numbers</label>
+                                        <input type="text" class="form-control" id="containerNumbers"
+                                               placeholder="CONT12345">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label">Dispatch Date</label>
+                                        <input type="date" class="form-control" id="dispatchDate">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Route Information -->
+                            <div class="form-section mt-4">
+                                <h6 class="section-title">
+                                    <i class="fa fa-route me-2"></i>Route Information
+                                </h6>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Origin (POL)</label>
+                                        <input type="text" class="form-control" id="origin"
+                                               placeholder="Shanghai Port">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Destination (POD)</label>
+                                        <input type="text" class="form-control" id="destination"
+                                               placeholder="Los Angeles Port">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer shipment-modal-footer">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fa fa-save me-2"></i>Save Shipment
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary px-4"
+                                    data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+</fieldset>
+
+<script>
+     $(document).ready(function () {
+        updateSidebarWithStatusCounts();
+        LoadDropDown();
+
+     $('#btnSubmits').on('click', function (e) {
+             e.preventDefault();
+             const shippingData = {
+                 Mode: $('#mode option:selected').text(),
+                 ModeID: $('#mode').val(),
+                 ReferenceNo: $('#referenceNo').val(),
+                 TrackingNumber: $('#trackingNumber').val(),
+                 Carrier: $('#carrier').val(),
+                 ContainerNumbers: $('#containerNumbers').val(),
+                 DispatchDate: $('#dispatchDate').val(),
+                 Origin: $('#origin').val(),
+                 Destination: $('#destination').val()
+             };
+
+             $.ajax({
+                 url: '/Dashboard/AddShipment',
+                 type: 'POST',
+                 contentType: 'application/json',
+                 data: JSON.stringify(shippingData),
+                 success: function (response) {
+                     alert(response.message || 'Shipment saved successfully!');
+                     $('#shipmentModal').modal('hide');
+                     SeletedDataload();
+                 },
+                 error: function (err) {
+                     console.error(err);
+                     alert("Failed to save shipment.");
+                 }
+             });
+         });
+
+     $('#btn_InTransit').on('click', function () {
+           StatusDataload('In transit');
+        });
+
+     $('#btn_Arrived').on('click', function () {
+          StatusDataload('Arrived');
+        });
+
+     $('#Btn_Delayed').on('click', function () {
+           StatusDataload('Delayed');
+        });
+
+     document.querySelectorAll('#statusList a').forEach(item => {
+                item.addEventListener('click', function () {
+                document.querySelector('#statusList .active')?.classList.remove('active');
+                this.classList.add('active');
+            });
+    });
+
+     });
+
+     async function DDlMode() {
+         try {
+             const response = await fetch('/Dashboard/DDlMode');
+             const data = await response.json();
+             const ddl = $('#mode');
+             ddl.empty().append('<option value="">-- Select Mode --</option>');
+             data.forEach(item => {
+                 ddl.append(`<option value="${item.value}">${item.text}</option>`);
+             });
+         } catch (error) {
+             console.error("Error loading Mode:", error);
+             toastr.error('Error loading Mode: ' + error.message);
+         }
+     }
+
+     async function LoadDropDown() {
+         try {
+             await Promise.all([DDlMode()]);
+             addRow();
+         } catch (error) {
+             console.error("Error loading dropdowns:", error);
+         }
+     }
+
+     function StatusDataload(searchTerm) {       
+         var tbody = $("#shipmentTable tbody");
+         tbody.empty();
+         $.ajax({
+             url: '/Dashboard/StatuswiseData',
+             type: 'GET',
+             data: { searchTerm: searchTerm },
+             success: function (response) {         
+                 if (!response || response.length === 0) {
+                     return;
+                 }
+
+                 response.forEach(function (item) {
+                     var row = `
+                         <tr>
+                             <td>${item.mode}</td>
+                             <td>${item.containerNumbers}</td>
+                             <td>${item.trackingNumber}</td>
+                             <td>${formatDate(item.shippingTime)}</td>
+                             <td>${formatDate(item.eta)}</td>
+                             <td>${formatDate(item.actualTime)}</td>
+                             <td>${formatDate(item.arrivalDate)}</td>
+                             <td>${formatDate(item.dispatchDate)}</td>
+                             <td>${item.portOfDeparture}</td>
+                             <td>${item.currentPosition}</td>
+                             <td>${item.portOfDestination}</td>
+                             <td>${item.status}</td>
+                         </tr>`;
+                     tbody.append(row);
+                 });
+             },
+             error: function (err) {
+                 console.error(err);
+                 tbody.append('<tr><td colspan="12" class="text-danger text-center">Error loading data</td></tr>');
+             }
+         });
+     }
+
+     async function updateSidebarWithStatusCounts() {
+         $.ajax({
+             url: '/Dashboard/StatusCount',
+             type: 'GET',
+             success: function (response) {
+                 console.log('count', response);
+
+                 const statusCounts = {
+                      "All Shipments": response.Total || 0,
+                     "Yet to Start": response.YetToStart || 0,
+                     "In Transit": response.In_transit || 0,
+                     "Arrived": response.Arrived || 0,
+                     "Delayed": response.Delayed || 0,
+                     "Shipped": response.Shipped || 0,
+
+                 };
+
+                 $('#statusList .list-group-item').each(function () {
+                     const statusText = $(this).text().split(' (')[0].trim();
+
+
+                     if (statusCounts[statusText] !== undefined) {
+                         $(this).text(`${statusText} (${statusCounts[statusText]})`);
+                     }
+                 });
+             },
+             error: function (err) {
+                 console.error('Error fetching status counts:', err);
+             }
+         });
+     }
+
+</script>

@@ -1,0 +1,137 @@
+/* General Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-size: small;
+    font-family: 'Montserrat', sans-serif;
+}
+.form-control {
+    color: #002046;
+}
+/* Navbar Styling */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #333;
+    font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.sidebar .list-group-item {
+    border: none;
+    background-color: transparent;
+    font-weight: 500;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.sidebar .list-group-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-primary {
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal-header {
+    background-color: #e1e1e1;
+}
+
+.modal-title {
+    color: #000054;
+    border-radius: 4px;
+    border-bottom: 1px solid #000054;
+}
+
+.modal-body {
+    font-size: 0.9rem;
+}
+
+/* Table Styles */
+.table-container {
+    margin: 50px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.table th, .table td {
+    padding: 12px;
+}
+
+.table thead {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #b0daff;
+    transition: background-color 0.3s ease;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-active { background-color: #d1e7dd; color: #0f5132; }
+.status-pending { background-color: #fff3cd; color: #664d03; }
+.status-delayed { background-color: #f8d7da; color: #842029; }
+.status-arrived { background-color: #cfe2ff; color: #084298; }
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+tbody tr {
+    animation: fadeInUp 0.5s ease both;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+}
