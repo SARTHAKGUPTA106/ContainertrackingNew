@@ -1,0 +1,52 @@
+﻿
+body {
+    background-image: url('/image/loginback.jpg');
+    /* Correct path for static images */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.login-container {
+    background-color: rgb(255 255 255 / 32%);
+    border-radius: 12px;
+    padding: 40px 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+}
+
+.btn-login {
+    background-color: #002046;
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+    .btn-login:hover {
+        /* background-color: #0056b3; */
+        border: 2px solid #7dbbff;
+        color: #7dbbff;
+    }
+
+.forgot-password, .register-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .forgot-password a, .register-link a {
+        color: #6bdeeb;
+    }
+
+        .forgot-password a:hover, .register-link a:hover {
+            text-decoration: underline;
+        }
+
+

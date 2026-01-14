@@ -25,7 +25,8 @@ namespace Containertracking.Controllers
 
         public IActionResult AuthenticateUser(string username, string password)
         {
-            string query = $"SELECT COUNT(1) AS UserCount FROM Users WHERE Username = @Username AND Password = @Password";
+            string query = $"SELECT COUNT(1) AS UserCount FROM Login " +
+                $" WHERE UserName = @Username AND Password = @Password";
             var parameters = new List<SqlParameter>
             {
                 new SqlParameter("@Username", SqlDbType.NVarChar) { Value = username },
